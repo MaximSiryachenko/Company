@@ -8,7 +8,6 @@ namespace Company
         static void Main(string[] args)
         {
             Firm firm = new Firm();
-            Manager m = new Manager("Muravlov", "Roman", "Oleksiovich", 8);
 
             firm.Employees += new Worker("Loboda", "Anatoly", "Sergiovich", 2);
             firm.Employees += new Worker("Petrov", "Petr", "Petrovich", 3);
@@ -18,16 +17,15 @@ namespace Company
             firm.Employees += new Foreman("Stadnik", "Mihailo", "Nikolaevich", 4);
 
             Console.WriteLine("PrintEmployees Check: \n\nForeman:");
-            FirmExtencion.PrintEmployees<Foreman>(firm);
+            FirmExtension.PrintEmployees<Foreman>(firm);
             Console.WriteLine("\nWorker:");
-            FirmExtencion.PrintEmployees<Worker>(firm);
+            FirmExtension.PrintEmployees<Worker>(firm);
             Console.WriteLine("\n\nCheckEmployee Check (True, False):");
-            Console.WriteLine(FirmExtencion.CheckEmployee(firm, firm.Employees[2]));
-            Console.WriteLine(FirmExtencion.CheckEmployee(firm, new Worker("Petrov", "Petr", "Petrovich", 3)));
+            Console.WriteLine(FirmExtension.CheckEmployee(firm, firm.Employees[2]));
+            Console.WriteLine(FirmExtension.CheckEmployee(firm, new Worker("Petrov", "Petr", "Petrovich", 3)));
             Console.WriteLine("\nGetCountEmployees<Foreman> Check (2):");
-            Console.WriteLine(FirmExtencion.GetCountEmployees<Foreman>(firm));
+            Console.WriteLine(FirmExtension.GetCountEmployees<Foreman>(firm));
 
-            Console.ReadKey();
         }
     }
 }
