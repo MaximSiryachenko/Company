@@ -5,35 +5,53 @@ using System.Linq;
 
 namespace Company
 {
-
+    /// <summary>
+    /// The class represents a firm and contains information about her employees
+    /// </summary>
     public class Firm
     {
+        /// <summary>
+        /// List of company employees of all types
+        /// </summary>
         public List<Employee> Employees = new List<Employee>();
     }
 
-    public static class FirmExtencion
+    /// <summary>
+    /// The class extends the functionality of the Firm class using LINQ
+    /// </summary>
+    public static class FirmExtension
     {
-        public static bool CheckEmployee(this Firm firm, Employee employee)
+        /// <summary>
+        ///  This method checks if the employee is on the list
+        /// </summary>
+        public static bool CheckEmployee(Firm firm, Employee employee)
         {
             return firm.Employees.Contains(employee);
         }
 
+        /// <summary>
+        /// This method returns a list of employees of a specific type
+        /// </summary>
         public static List<Employee> GetEmployees<T>(this Firm firm)
         {
-            var emp = firm.Employees.Where(e => e.GetType() == typeof(T));
-            List<Employee> emps = new List<Employee>();
-            foreach (var e in emp)
-                emps.Add(e);
+            List<Employee> emps = firm.Employees.Where(e => e.GetType() == typeof(T)).ToList();
             return emps;
         }
-        public static int GetCountEmployees<T>(this Firm firm)
+
+        /// <summary>
+        /// This method returns the number of employees of a specific type
+        /// </summary>
+        public static int GetCountEmployees<T>(Firm firm)
         {
             return firm.Employees.Count(e => e.GetType() == typeof(T));
         }
 
+        /// <summary>
+        /// This method outputs to the console of a certain type of employees
+        /// </summary>
         public static void PrintEmployees<T>(this Firm firm)
         {
-            var employees = GetEmployees<T>(firm);
+            var employees = firm.GetEmployees<T>();
 
             foreach (var i in employees) 
             {
