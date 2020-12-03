@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Company.Employees;
+using System;
 
 namespace Company
 {
@@ -6,7 +7,27 @@ namespace Company
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Firm firm = new Firm();
+            Manager m = new Manager("Muravlov", "Roman", "Oleksiovich", 8);
+
+            firm.Employees += new Worker("Loboda", "Anatoly", "Sergiovich", 2);
+            firm.Employees += new Worker("Petrov", "Petr", "Petrovich", 3);
+            firm.Employees += new Manager("Muravlov", "Roman", "Oleksiovich", 8);
+            firm.Employees += new Foreman("Sergienko", "Sergei", "Sergeevich", 5);
+            firm.Employees -= firm.Employees[1];
+            firm.Employees += new Foreman("Stadnik", "Mihailo", "Nikolaevich", 4);
+
+            Console.WriteLine("PrintEmployees Check: \n\nForeman:");
+            FirmExtencion.PrintEmployees<Foreman>(firm);
+            Console.WriteLine("\nWorker:");
+            FirmExtencion.PrintEmployees<Worker>(firm);
+            Console.WriteLine("\n\nCheckEmployee Check (True, False):");
+            Console.WriteLine(FirmExtencion.CheckEmployee(firm, firm.Employees[2]));
+            Console.WriteLine(FirmExtencion.CheckEmployee(firm, new Worker("Petrov", "Petr", "Petrovich", 3)));
+            Console.WriteLine("\nGetCountEmployees<Foreman> Check (2):");
+            Console.WriteLine(FirmExtencion.GetCountEmployees<Foreman>(firm));
+
+            Console.ReadKey();
         }
     }
 }
